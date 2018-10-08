@@ -1,5 +1,5 @@
 #pragma once
+#include <wavheader.h>
+#include <iostream>
 
-struct RIFFdescriptor ;
-struct fmtDhunk;
-struct audioData;
+WAVHeader extractHeader(std::string fileName);

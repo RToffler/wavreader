@@ -1,27 +1,23 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+#include <fstream>
+#include "wavheader.h"
 
 using namespace std;
 
-typedef struct RIFFdescriptor{
-    char chunkID[4];
-    long chunkSize;
-    char format[4];
-};
+WAVHeader extractHeader(std::string fileName){
+    WAVHeader header;
+    
+    //memBlock for assigning null terminator.
+    char * memBlock = new char[5];
+    memBlock[4] = '\0';
 
-typedef struct fmtChunk{
-    char subchunkOneID[4];
-    long subchunkOneSize;
-    int audioFormat;
-    int numChannels;
-    long sampleRate;
-    long byteRate;
-    int blockAlign;
-    int bitsPerSample;
-};
+    fstream stream;
+    stream.open(fileName, fstream::in);
+    
+    stream.read(memBlock, 4);
+    header.chunkID = memBlock;
 
-typedef struct audioData{
-    char subchunkTwoID[4];
-    long subchunkTwoSize;
-    int * data;
-};
+    stream.read(memBlock, 4);
+    header.chunkSize = atoi(memBlock);
+    return header;
+}

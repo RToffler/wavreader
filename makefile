@@ -3,14 +3,14 @@ TARGET = wavreader.exe
 DIR_SOURCE = .\src
 DIR_INCLUDE = .\include
 DIR_BIN = .\bin
-DIR_OBJ = $(DIR_BIN)\obj
+DIR_OBJ = $(DIR_BIN)\obj\\
 
 SOURCES = \
 	$(DIR_SOURCE)\main.cpp\
 	$(DIR_SOURCE)\wavreader.cpp\
 
 $(TARGET) : $(SOURCES)
-	cl /EHsc /Fe$(DIR_BIN)\$(TARGET) /I$(DIR_INCLUDE) $(SOURCES)
+	cl /EHsc /Fo$(DIR_OBJ) /Fe$(DIR_BIN)\$(TARGET) /I$(DIR_INCLUDE) $(SOURCES)
 
 
 wavreader: $(TARGET)
